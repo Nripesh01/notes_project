@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read</title>
+</head>
+<body>
+    <h1>Your Notes</h1>
+<a href="{% url 'notes:create_note' %}">+ New Note</a>
+<ul>
+  {% for note in notes %}
+    <li>
+      <strong>{{ note.title }}</strong><br>
+      {{ note.content|truncatewords:10 }}
+      <a href="{% url 'notes:update_note' note.id %}">Edit</a>
+      <a href="{% url 'notes:delete_note' note.id %}">Delete</a>
+    </li>
+  {% endfor %}
+</ul>
+</body>
+</html>
