@@ -16,12 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import redirect
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
+# TokenObtainPairView provides a pair of tokens:
+  # access	
+  # refresh
+
+# TokenRefreshView
+# This view refreshes an expired access token using the refresh token.
+
+ 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('notes.urls')),
-    path('', lambda request: redirect('login')),  # Redirect / to /login
+    path('api/', include('notes.urls')),
+    path('api/token', TokenObtainPairView.as_view(), name='token-obtain'),
+    path('api/token/refresh', TokenRefreshView.as_view(), name='token-refresh'),path('api/', include('notes.urls')),
+    
 
 ]
